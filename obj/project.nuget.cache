@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vl8LB3A1wg0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Alberto\\Documents\\MatMaker\\MatMaker\\MatMaker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Alberto\\.nuget\\packages\\mathnet.numerics\\5.0.0\\mathnet.numerics.5.0.0.nupkg.sha512",
+    "C:\\Users\\Alberto\\.nuget\\packages\\mathnet.numerics.data.matlab\\5.0.0\\mathnet.numerics.data.matlab.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
