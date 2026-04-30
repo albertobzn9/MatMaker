@@ -28,7 +28,7 @@ namespace CreadorMatWin
 
             Panel panelTop = new Panel { Dock = DockStyle.Top, Height = 80, Padding = new Padding(20) };
             TextBox txtVarName = new TextBox { Dock = DockStyle.Top, Font = new Font("Segoe UI", 12) };
-            Label lblVar = new Label { Text = "1. Nombre de la variable (Ej. exp_0126_dis_d1r1):", Dock = DockStyle.Top, Height = 25, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
+            Label lblVar = new Label { Text = "1. Nombre de la variable (Ej. exp_0126_abs_dis_h_d1r1):", Dock = DockStyle.Top, Height = 25, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
             panelTop.Controls.Add(txtVarName);
             panelTop.Controls.Add(lblVar);
 
