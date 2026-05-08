@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>logo_matmaker.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\logo_matmaker.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
