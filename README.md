@@ -20,3 +20,14 @@ No es necesario compilar el código. Simplemente dirígete a la sección de **[R
 ## Tecnologías
 - **C# / .NET 10 (WinForms):** Interfaz nativa y compilación AOT.
 - **MathNet.Numerics:** Manipulación y exportación de matrices estandarizadas.
+
+## Archivo Paralelo En Drive
+
+El snapshot usado como evidencia tutoral se conserva en:
+
+```text
+/Users/ab/Library/CloudStorage/GoogleDrive-jasjabs19@gmail.com/My Drive/workspace/04_doctorado/02_evaluacion-tutoral/01_sources/04_repos_del_proyecto/03_MatMaker-main
+```
+
+Es una copia histórica de referencia. El trabajo activo y las correcciones se
+hacen únicamente en este repositorio.
