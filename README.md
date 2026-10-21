@@ -18,9 +18,19 @@ En el flujo de trabajo de análisis de datos, a menudo la información se recole
 ## Descarga y Uso
 No es necesario compilar el código. Simplemente dirígete a la sección de **[Releases]** en este repositorio y descarga el archivo `MatMaker.exe`.
 
+Para macOS con Apple Silicon, descarga el archivo `.dmg`, ábrelo y arrastra MatMaker a Aplicaciones. Cada release incluye además un `.zip` portátil para macOS y otro para Windows.
+
 ## Tecnologías
 - **C# / .NET 10 + Avalonia UI:** Interfaz de escritorio multiplataforma.
 - **MathNet.Numerics:** Manipulación y exportación de matrices estandarizadas.
+
+## Crear una versión para distribuir
+
+En macOS, este comando crea un `.dmg` y un `.zip` que contienen `MatMaker.app` para Apple Silicon, además de un `.exe` autocontenido y su `.zip` para Windows de 64 bits:
+
+```bash
+./scripts/package-release.sh 1.1.0
+```
 
 ## Archivo Paralelo En Drive
 
