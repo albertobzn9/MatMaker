@@ -1,18 +1,14 @@
-name: Compilar y Subir EXE
+name: Validar proyecto
 
 on:
   push:
     branches: [ "main", "master" ]
-    tags: [ "v*" ] # Se activa al subir una etiqueta como v1.0.2
+  pull_request:
+    branches: [ "main", "master" ]
   workflow_dispatch:
-    inputs:
-      release_tag:
-        description: 'Tag del Release a actualizar (ej. v1.0.1)'
-        required: false
-        default: ''
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
@@ -28,28 +24,4 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Compilar el proyecto
-      run: dotnet publish MatMaker.csproj -c Release -o out
-
-    - name: Crear archivo ZIP
-      shell: pwsh
-      run: |
-        Compress-Archive -Path out/MatMaker.exe -DestinationPath out/MatMaker.zip
-
-    - name: Guardar artefactos (EXE y ZIP)
-      uses: actions/upload-artifact@v4
-      with:
-        name: MatMaker-Windows-Files
-        path: |
-          out/MatMaker.exe
-          out/MatMaker.zip
-
-    - name: Subir al Release de GitHub
-      if: startsWith(github.ref, 'refs/tags/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag != '')
-      uses: softprops/action-gh-release@v2
-      with:
-        files: |
-          out/MatMaker.exe
-          out/MatMaker.zip
-        tag_name: ${{ github.event.inputs.release_tag || github.ref_name }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet build MatMaker.csproj --configuration Release
