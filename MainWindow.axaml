@@ -1,0 +1,68 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MatMaker.MainWindow"
+        Title="MatMaker"
+        Icon="/Assets/logo_matmaker.ico"
+        Width="840"
+        Height="680"
+        MinWidth="640"
+        MinHeight="480"
+        WindowStartupLocation="CenterScreen">
+  <Grid Margin="24" RowDefinitions="Auto,Auto,Auto,*,Auto" RowSpacing="14">
+    <StackPanel Spacing="4">
+      <TextBlock FontSize="28" FontWeight="SemiBold" Text="MatMaker" />
+      <TextBlock Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                 Text="Convierte una tabla pegada desde Excel a un archivo MATLAB compatible." />
+    </StackPanel>
+
+    <Border Grid.Row="1"
+            Padding="14"
+            Background="{DynamicResource SystemControlHighlightAltLowBrush}"
+            BorderBrush="{DynamicResource SystemControlHighlightAltAccentBrush}"
+            BorderThickness="1"
+            CornerRadius="8">
+      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+        <StackPanel Spacing="4">
+          <TextBlock FontWeight="SemiBold" Text="Nombre del archivo" />
+          <TextBox x:Name="FileNameTextBox"
+                   PlaceholderText="Ejemplo: exp_0526_dis_d4r4" />
+          <TextBlock Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                     Text="Se guardará con extensión .mat y ese nombre identificará a la rata en la automatización." />
+        </StackPanel>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Spacing="4">
+          <TextBlock FontWeight="SemiBold" Text="Variable MATLAB" />
+          <TextBlock FontFamily="Consolas, Menlo, monospace" FontSize="16" Text="Resultados" />
+          <TextBlock Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                     Text="Igual que los .mat originales" />
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <StackPanel Grid.Row="2" Spacing="4">
+      <TextBlock FontWeight="SemiBold" Text="Pega la tabla de Excel" />
+      <TextBlock Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}"
+                 Text="Se acepta una fila de encabezados. La tabla debe tener exactamente ocho columnas numéricas." />
+    </StackPanel>
+
+    <TextBox x:Name="DataTextBox"
+             Grid.Row="3"
+             AcceptsReturn="True"
+             FontFamily="Consolas, Menlo, monospace"
+             ScrollViewer.HorizontalScrollBarVisibility="Auto"
+             TextWrapping="NoWrap"
+             ScrollViewer.VerticalScrollBarVisibility="Auto"
+             PlaceholderText="Copia las ocho columnas desde Excel y pégalas aquí." />
+
+    <Grid Grid.Row="4" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+      <TextBlock x:Name="StatusText"
+                 VerticalAlignment="Center"
+                 TextWrapping="Wrap"
+                 Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+      <Button Grid.Column="1" Click="ValidateButton_Click" Content="Validar tabla" />
+      <Button Grid.Column="2"
+              Padding="16,8"
+              Click="SaveButton_Click"
+              Content="Guardar archivo .mat…" />
+    </Grid>
+  </Grid>
+</Window>
