@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  Crea archivos <code>.mat</code> compatibles con MATLAB a partir de tablas copiadas desde Excel.<br />
+  Crea archivos <code>.mat</code> compatibles con MATLAB a partir de tablas copiadas desde Excel.<br /><br />
   <a href="README.md">English</a> · <a href="README.es.md">Español</a>
 </p>
 

@@ -6,7 +6,7 @@
 
 
 <p align="center">
-  Create MATLAB-compatible <code>.mat</code> files from tables copied from Excel.<br />
+  Create MATLAB-compatible <code>.mat</code> files from tables copied from Excel.<br /><br />
   <a href="README.md">English</a> · <a href="README.es.md">Español</a>
 </p>
 
