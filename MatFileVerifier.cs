@@ -13,13 +13,13 @@ internal static class MatFileVerifier
 
         if (matrices.Count != 1 || matrices[0].Name != variableName)
         {
-            throw new InvalidDataException($"La comprobación falló: el archivo debe contener únicamente la variable {variableName}.");
+            throw new InvalidDataException(AppLocalizer.Current.Get(UiText.VerificationVariable));
         }
 
         var actual = MatlabReader.Unpack<double>(matrices[0]);
         if (actual.RowCount != expected.RowCount || actual.ColumnCount != expected.ColumnCount)
         {
-            throw new InvalidDataException("La comprobación falló: la matriz guardada no conserva sus dimensiones.");
+            throw new InvalidDataException(AppLocalizer.Current.Get(UiText.VerificationDimensions));
         }
 
         for (var row = 0; row < expected.RowCount; row++)
@@ -35,7 +35,7 @@ internal static class MatFileVerifier
 
                 if (expectedValue != actualValue)
                 {
-                    throw new InvalidDataException($"La comprobación falló: cambió el valor de la fila {row + 1}, columna {column + 1}.");
+                    throw new InvalidDataException(AppLocalizer.Current.Format(UiText.VerificationValue, row + 1, column + 1));
                 }
             }
         }

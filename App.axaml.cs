@@ -6,6 +6,8 @@ namespace MatMaker;
 
 public partial class App : Application
 {
+    internal AppLocalizer Localizer { get; } = new();
+
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
     public override void OnFrameworkInitializationCompleted()

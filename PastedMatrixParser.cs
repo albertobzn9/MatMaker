@@ -19,20 +19,20 @@ internal static class PastedMatrixParser
 
         if (lines.Count == 0)
         {
-            throw new ArgumentException("No hay datos. Copia la tabla desde Excel y pégala aquí.");
+            throw new ArgumentException(AppLocalizer.Current.Get(UiText.NoData));
         }
 
         var firstRow = SplitRow(lines[0]);
         var headerDiscarded = IsHeader(firstRow);
         if (!headerDiscarded && firstRow.Any(cell => !string.IsNullOrWhiteSpace(cell) && !TryParseFiniteNumber(cell, out _)))
         {
-            throw new ArgumentException("La primera fila mezcla texto y números. Corrige la tabla o pega un encabezado completo seguido de los datos.");
+            throw new ArgumentException(AppLocalizer.Current.Get(UiText.MixedFirstRow));
         }
 
         var firstDataLine = headerDiscarded ? 1 : 0;
         if (firstDataLine == lines.Count)
         {
-            throw new ArgumentException("La tabla sólo contiene encabezados; faltan las filas de datos.");
+            throw new ArgumentException(AppLocalizer.Current.Get(UiText.HeadersOnly));
         }
 
         var rows = new List<double[]>();
@@ -42,7 +42,7 @@ internal static class PastedMatrixParser
             var cells = SplitRow(lines[lineIndex]);
             if (cells.Length != RequiredColumnCount)
             {
-                throw new ArgumentException($"La fila {lineIndex + 1} tiene {cells.Length} columnas. La automatización requiere exactamente {RequiredColumnCount}.");
+                throw new ArgumentException(AppLocalizer.Current.Format(UiText.WrongColumnCount, lineIndex + 1, cells.Length));
             }
 
             var row = new double[RequiredColumnCount];
@@ -58,7 +58,7 @@ internal static class PastedMatrixParser
 
                 if (!TryParseFiniteNumber(cell, out var value))
                 {
-                    throw new ArgumentException($"La celda de fila {lineIndex + 1}, columna {column + 1} no contiene un número válido: “{cell}”.");
+                    throw new ArgumentException(AppLocalizer.Current.Format(UiText.InvalidCell, lineIndex + 1, column + 1, cell));
                 }
 
                 row[column] = value;
