@@ -1,44 +1,81 @@
 # MatMaker
 
-Una herramienta de escritorio multiplataforma, construida con .NET y Avalonia UI, diseñada para convertir bloques de datos copiados de Excel directamente a archivos `.mat` compatibles con MATLAB.
+<p align="center">
+  <img src="src/MatMaker/Assets/matmaker-mark.png" alt="MatMaker logo" width="150" />
+</p>
 
-## ¿Para qué sirve?
-En el flujo de trabajo de análisis de datos, a menudo la información se recolecta en Excel o CSV. Importar esto manualmente a MATLAB para análisis complejos puede ser tedioso y propenso a errores de formato. MatMaker elimina este paso intermedio: 
+<p align="center">
+  Create MATLAB-compatible <code>.mat</code> files from tables copied from Excel.<br />
+  <a href="README.md">English</a> · <a href="README.es.md">Español</a>
+</p>
 
-1. Escribe el nombre del archivo (ej. `exp_0126_dis_d1r1`).
-2. Pega directamente los datos tabulares.
-3. Guarda el archivo `.mat` al instante.
+MatMaker is a lightweight cross-platform desktop app for turning an 8-column table into a compatible MATLAB `.mat` file. It does not require MATLAB to be installed.
 
-## Características
-- **Cero latencia:** Procesa cientos de filas instantáneamente leyendo el portapapeles en crudo (tabuladores de Excel).
-- **Compatibilidad Caja Valentia:** Exige exactamente 8 columnas y guarda una única matriz numérica `double` llamada `Resultados`, igual que los archivos MATLAB originales.
-- **Validación antes de guardar:** Detecta encabezados, celdas vacías, filas incompletas y números no válidos antes de crear el archivo.
-- **Portabilidad:** Avalonia UI permite que la misma aplicación funcione en macOS y Windows, sin requerir MATLAB.
+## Features
 
-## Descarga y Uso
-No es necesario compilar el código. Simplemente dirígete a la sección de **[Releases]** en este repositorio y descarga el archivo `MatMaker.exe`.
+- Paste tab-separated data directly from Excel.
+- Accept an optional header row and validate exactly eight numeric columns.
+- Preserve empty cells as `NaN`.
+- Save one `double` matrix named `Resultados`, matching the files used by the Valentia workflow.
+- Read the saved file back and verify its variable name, dimensions, and values.
+- Switch the interface between English and Spanish.
+- Run on macOS and Windows from self-contained releases.
 
-Para macOS con Apple Silicon, descarga el archivo `.dmg`, ábrelo y arrastra MatMaker a Aplicaciones. Cada release incluye además un `.zip` portátil para macOS y otro para Windows.
+## Download
 
-## Tecnologías
-- **C# / .NET 10 + Avalonia UI:** Interfaz de escritorio multiplataforma.
-- **MathNet.Numerics:** Manipulación y exportación de matrices estandarizadas.
+Get the installer or portable package for your operating system from the [latest release](https://github.com/albertobzn9/MatMaker/releases/latest).
 
-## Crear una versión para distribuir
+Each release provides a macOS `.dmg`, a macOS portable `.zip`, a standalone Windows `.exe`, and a Windows portable `.zip`.
 
-En macOS, este comando crea un `.dmg` y un `.zip` que contienen `MatMaker.app` para Apple Silicon, además de un `.exe` autocontenido y su `.zip` para Windows de 64 bits:
+## Use the app
+
+1. Enter the file name, without the `.mat` extension.
+2. Copy the eight columns from Excel and paste them into the main text area.
+3. Select **Validate table** to review the data.
+4. Select **Save .mat file…** and choose a destination.
+
+The saved file contains only one matrix variable: `Resultados`.
+
+## Run from source
+
+Requirements: [.NET SDK 10](https://dotnet.microsoft.com/download/dotnet/10.0).
 
 ```bash
-./scripts/package-release.sh 1.1.0
+git clone https://github.com/albertobzn9/MatMaker.git
+cd MatMaker
+dotnet run --project src/MatMaker/MatMaker.csproj
 ```
 
-## Archivo Paralelo En Drive
-
-El snapshot usado como evidencia tutoral se conserva en:
+## Repository layout
 
 ```text
-/Users/ab/Library/CloudStorage/GoogleDrive-jasjabs19@gmail.com/My Drive/workspace/04_doctorado/02_evaluacion-tutoral/01_sources/04_repos_del_proyecto/03_MatMaker-main
+src/MatMaker/       Avalonia application source and application assets
+├── Views/           Main window markup and its code-behind
+├── Services/        Parsing, verification, and interface localization
+└── Assets/          Application icons and logo
+docs/                Architecture and file-format notes
+packaging/           macOS bundle metadata
+scripts/             Local release-packaging script
 ```
 
-Es una copia histórica de referencia. El trabajo activo y las correcciones se
-hacen únicamente en este repositorio.
+See [the architecture guide](docs/README.md) for the processing flow and compatibility guarantees.
+
+## Build a release locally
+
+On macOS, create all distribution files with:
+
+```bash
+./scripts/package-release.sh 1.2.0
+```
+
+The script writes the macOS `.dmg`, macOS `.zip`, Windows `.exe`, and Windows `.zip` to `artifacts/release/<version>/`.
+
+## Technology
+
+- [.NET 10](https://dotnet.microsoft.com/)
+- [Avalonia UI](https://avaloniaui.net/)
+- [MathNet.Numerics.Data.Matlab](https://www.nuget.org/packages/MathNet.Numerics.Data.Matlab)
+
+## License
+
+This repository currently does not declare a license. Contact the repository owner before redistributing or reusing the code.
